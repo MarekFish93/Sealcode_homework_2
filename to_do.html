@@ -11,37 +11,42 @@
 
 
 <body align="center">
-<div id="container" align="center" margin='auto' style="width:50%;margin:auto;">
+<main>
     <header>
         <h1>TO DO LIST</h1>
     </header>
     
-    
-        <form>
-            <div>
+    <section>
+            <form action="post">
                 <input id="task" type="text" placeholder="Write what you need to do">
-            </div>
-            <div><br>
                 <button value="submit">Add to list</button>
                 <button value="submit">Delete done</button>
-            </div>
-        </form>
+            </form>
+    </section>
     
-    <h2>STUFF TO TRY</h2>
-    <div align="left">
-        <div><h3>Tytul</h3>Data<br><input type="checkbox"><label>Done?</label></div><hr>
-        <div><h3>Tytul</h3>Data<br><input type="checkbox"><label>Done?</label></div><hr>
-        <div><h3>Tytul</h3>Data<br><input type="checkbox"><label>Done?</label></div><hr>
-        <div><h3>Tytul</h3>Data<br><input type="checkbox"><label>Done?</label></div><hr>
-        <div><h3>Tytul</h3>Data<br><input type="checkbox"><label>Done?</label></div><hr>
-        <div><h3>Tytul</h3>Data<br><input type="checkbox"><label>Done?</label></div><hr>
-        <div><h3>Tytul</h3>Data<br><input type="checkbox"><label>Done?</label></div><hr>
-        <div><h3>Tytul</h3>Data<br><input type="checkbox"><label>Done?</label></div><hr>
-        <div><h3>Tytul</h3>Data<br><input type="checkbox"><label>Done?</label></div><hr>
-        <div><h3>Tytul</h3>Data<br><input type="checkbox"><label>Done?</label></div><hr>
-        <div><h3>Tytul</h3>Data<br><input type="checkbox"><label>Done?</label></div><hr>
-    </div>
+    <section>
+        <h2>STUFF TO TRY</h2>
+        <ul>
+            <li><h3>Tytul</h3>
+                <p>Data</p>  
+                <input id="done1" type="checkbox"><label for="done1">Done?</label>
+            </li>
+            <hr>
+            <li><h3>Tytul</h3>
+                <p>Data</p>  
+                <input id="done2" type="checkbox"><label for="done2">Done?</label>
+            </li>
+            <hr>
+            <li><h3>Tytul</h3>
+                <p>Data</p>  
+                <input id="done3" type="checkbox"><label for="done3">Done?</label>
+            </li>
     
-</div>
+   
+        
+        </ul>
+    </section>
+    
+</main>
 </body>
 </html>
