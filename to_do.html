@@ -1,14 +1,13 @@
 <!DOCTYPE HTML>
 <html lang="pl"
 <head>
-    <title>Tytuł strony</title>
+    <title>To-do app</title>
     
     <meta charset="UTF-8"> 
     <meta name="Marek Rybka"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
-    <link rel="stylesheet" href="http://basehold.it/24">
 <style>
     html{
         
@@ -36,7 +35,8 @@
         padding: 0.5rem;
         text-align: center;
         max-height:0.9rem;
-        max-width: 10rem;
+        max-width: 9rem;
+        
 
     }
     button{
@@ -70,16 +70,16 @@
     }
     ul li{
         transition: 0s background-color;
-       max-width:28.8rem;
+        max-width:28.8rem;
         margin-left: -1.6rem;
-        max-height: 6rem;
+        height: 6rem;
         padding-left: 1rem;
         margin-top: -0.8rem;  
     }
   ul li:hover{
         background-color:#cececa;
         transition: 0.5s background-color;
-        max-height: 6rem;
+        height: 6rem;
         max-width:28.8rem;
         margin-left: -1.6rem;
         margin-top: -0.8rem;  
@@ -136,31 +136,107 @@
     </header>
     
     <section>
-            <form action="post">
                 <div>
                 <input id="task" type="text" placeholder="Write what you need to do">
                 </div>
-                <button value="submit">Add to list</button>
-                <button value="submit">Delete done</button>
-            </form>
+                <button id="add" value="submit">Add to list</button>
+                <button id="delete" value="submit">Delete done</button>
     </section>
     
     <section>
         <h2>STUFF TO TRY</h2>
-        <ul>
-            <li><h3>Tytuł</h3>
-                <p>Tue Nov 29 2016 10:19:43 GMT+0100 (CET)</p>  
-                <input id="done" type="checkbox"><label for="done">Done?</label></li
-                ><hr><li><h3>Tytuł</h3>
-                <p>Tue Nov 29 2016 10:19:43 GMT+0100 (CET)</p>  
-                <input id="done1" type="checkbox"><label for="done1">Done?</label></li
-                ><hr><li><h3>Tytuł</h3>
-                <p>Tue Nov 29 2016 10:19:43 GMT+0100 (CET)</p>  
-                <input id="done2" type="checkbox"><label for="done2">Done?</label></li>
+        <ul id="lista">
         </ul>
    </section>
     
     
 </main>
+    <script>
+        (function(){
+            var list=document.getElementById("lista");
+            var przycisk=document.getElementById("add");
+            var input= document.getElementById("task");
+            
+            var model_list=[
+                {
+                name:"",
+                date:""
+                }];
+            
+            function addListElement(parent,name,date){
+                                var list_item = document.createElement("li");
+
+                                var tytul = document.createElement("h3");
+                                tytul.innerHTML = name;
+                                list_item.appendChild(tytul);
+
+                                var data = document.createElement("p")
+                                data.innerHTML=date;
+                                list_item.appendChild(data);
+
+                                var checkbox = document.createElement('input');
+                                checkbox.type = "checkbox";
+                                checkbox.id = "box";
+                                list_item.appendChild(checkbox);
+
+                                var label = document.createElement('label');
+                                label.htmlFor = "box";
+                                label.appendChild(document.createTextNode('Done?'));
+                                list_item.appendChild(label);
+
+                                parent.appendFirst(list_item);
+
+                                var linia =document.createElement("hr");
+                                list_item.insertAfter(linia);
+                
+            }
+            
+            function render(model){
+                                clearList()
+                                model.forEach(                                                                        
+                                            function(task){
+                                            addListElement(list,task.name,task.date);
+                                            })
+            }
+            
+            HTMLElement.prototype.appendFirst=
+                                function(childNode){
+                                            if(this.firstChild)this.insertBefore(childNode,this.firstChild);
+                                            else this.appendChild(childNode);
+                                };
+           
+            Node.prototype.insertAfter = 
+                                function(newNode) {
+                                            if(this.nextSibling) {
+                                                return this.parentNode.insertBefore(newNode, this.nextSibling);
+                                            } else {
+                                                return this.parentNode.appendChild(newNode);
+                                            }
+                                }
+            
+            function clearList(){
+                                while (list.hasChildNodes())
+                                list.removeChild(list.lastChild);
+            }
+            
+            
+            add.addEventListener('click', 
+                                 function(){
+                                 var date = new Date().toJSON().slice(0,10)
+
+                                    model_list.push({
+                                    name : input.value,
+                                    date : date
+                                    })
+                                    render(model_list)
+                                }
+            )
+            
+        
+            
+            render(model_list)
+                
+        })()
+    </script>
 </body>
 </html>
