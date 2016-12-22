@@ -157,11 +157,7 @@
             var przycisk=document.getElementById("add");
             var input= document.getElementById("task");
             
-            var model_list=[
-                {
-                name:"",
-                date:""
-                }];
+            var model_list=[];
             
             function addListElement(parent,name,date){
                                 var list_item = document.createElement("li");
@@ -234,8 +230,8 @@
             
         
             
-            render(model_list)
-                
+            
+                render(model_list)
         })()
     </script>
 </body>
