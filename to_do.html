@@ -155,45 +155,69 @@
         (function(){
             var list=document.getElementById("lista");
             var przycisk=document.getElementById("add");
-            var input= document.getElementById("task");
+            var usun = document.getElementById("delete");
             
             var model_list=[];
             
-            function addListElement(parent,name,date){
+            function addListElement(task_data,index){
+                                
                                 var list_item = document.createElement("li");
-
+                                var tekst= document.getElementById('task');
+                               
                                 var tytul = document.createElement("h3");
-                                tytul.innerHTML = name;
+                                tytul.innerHTML=tekst.value;
                                 list_item.appendChild(tytul);
-
+                            
                                 var data = document.createElement("p")
+                                var date = new Date;
                                 data.innerHTML=date;
                                 list_item.appendChild(data);
 
                                 var checkbox = document.createElement('input');
                                 checkbox.type = "checkbox";
-                                checkbox.id = "box";
+                                
+                                if(task_data.done==true)
+                                checkbox.checked= "checked";
+                               
+
+                                checkbox.id=index;
+                                
+                                checkbox.onclick=update;
                                 list_item.appendChild(checkbox);
 
                                 var label = document.createElement('label');
-                                label.htmlFor = "box";
+                                label.htmlFor = index;
                                 label.appendChild(document.createTextNode('Done?'));
                                 list_item.appendChild(label);
 
-                                parent.appendFirst(list_item);
+                                list.appendFirst(list_item);
 
                                 var linia =document.createElement("hr");
                                 list_item.insertAfter(linia);
-                
+                                console.log(index)
+                                console.log(task_data.id)
             }
             
-            function render(model){
-                                clearList()
-                                model.forEach(                                                                        
-                                            function(task){
-                                            addListElement(list,task.name,task.date);
-                                            })
+        function render(model){
+                               {
+
+                            while (list.hasChildNodes())
+                                list.removeChild(list.lastChild);
+
+                            model_list.forEach(addListElement);
+}
             }
+//            function addTask() {
+//        
+//                                        var date_now = new Date().toJSON().slice(0, 10);
+//                                        var title = document.getElementById('task').value;
+//
+//                                        
+//                                        render(model_list);
+//                                        document.getElementById('task').value = "";
+//                                        console.log(title)
+//                }
+            
             
             HTMLElement.prototype.appendFirst=
                                 function(childNode){
@@ -213,25 +237,55 @@
             function clearList(){
                                 while (list.hasChildNodes())
                                 list.removeChild(list.lastChild);
+                
             }
+            
+            function update(event){    
+                                    model_list[this.id].done=!model_list[this.id].done
+                                    console.log(model_list)
+                                    render(model_list)
+            
+            }
+                 
+        
+          function deleteTasks() {
+                                for (var i = model_list.length - 1; i >= 0; i--)
+                                    if (model_list[i].done==true)
+                                      model_list.splice(i,1)
+                                }
             
             
             add.addEventListener('click', 
                                  function(){
-                                 var date = new Date().toJSON().slice(0,10)
+                                 var input= document.getElementById('task');
+                                 var date_now = new Date().toJSON().slice(0, 10);
+                                 var zaznaczony=false;
+                
+                                
 
                                     model_list.push({
                                     name : input.value,
-                                    date : date
+                                    date : date_now,
+                                    done: zaznaczony
                                     })
                                     render(model_list)
+                                    console.log(model_list)
+                                   
+                                } 
+            )
+     
+            
+                
+               
+//            add.addEventListener('click',addTask());
+              usun.addEventListener('click', 
+                                 function(){
+                                   deleteTasks()
+                                   render(model_list)
+                                   console.log(model_list)
                                 }
             )
-            
         
-            
-            
-                render(model_list)
         })()
     </script>
 </body>
